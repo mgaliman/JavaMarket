@@ -34,4 +34,7 @@ dist/
 nbdist/
 .nb-gradle/
 
+!gson-2.10.1.jar
+!mssql-jdbc-7.0.0.jre8.jar
+!rest-api-sdk-1.14.0.jar
 apache-tomcat-8.5.85/
