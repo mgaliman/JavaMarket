@@ -10,6 +10,6 @@ package enums;
  * @author mgaliman
  */
 public enum PaymentType {
-    CASH,
+    CASH_ON_DELIVERY,
     PAYPAL
 }
