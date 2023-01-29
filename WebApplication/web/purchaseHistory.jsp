@@ -17,37 +17,40 @@
         <!--DATA TABLE!-->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
     </head>
-    <body class="m-5">
-        <h2>Purchase History</h2>
-        <c:if test="${purchaseHistory.isEmpty()}">
-            <h1>You haven't purchased anything yet!</h>
-            </c:if>
-        <table class="table" id='purchaseHistoryTable'>
-            <thead class="table-dark">
-                <tr>
-                    <th scope="col">Payment type</th>
-                    <th scope="col">Payer</th>
-                    <th scope="col">Items</th>
-                    <th scope="col">Date</th>
-                </tr>
-            </thead>
-            <tbody class="table-light">
-                <c:forEach var="purchase" items="${purchaseHistory}">   
-                    <tr>
-                        <td>${purchase.paymentType}</td>
-                        <td>${purchase.payer}</td>
-                        <td>${purchase.items}</td>
-                        <td>${purchase.dateTime}</td>
-                    </tr>    
-                </c:forEach>  
-            </tbody>
-        </table>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <body>
+        <!-- Navigation bar -->
+        <%@include file='navbar.jsp'%>
 
+        <div class="m-5">
+            <c:if test="${purchaseHistory.isEmpty()}">
+                <h1>You haven't purchased anything yet!</h>
+                </c:if>
+                <table class="table" id='purchaseHistoryTable'>
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Payment type</th>
+                            <th scope="col">Payer</th>
+                            <th scope="col">Items</th>
+                            <th scope="col">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-light">
+                        <c:forEach var="purchase" items="${purchaseHistory}">   
+                            <tr>
+                                <td>${purchase.paymentType}</td>
+                                <td>${purchase.payer}</td>
+                                <td>${purchase.items}</td>
+                                <td>${purchase.dateTime}</td>
+                            </tr>    
+                        </c:forEach>  
+                    </tbody>
+                </table>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        </div>
         <!--DATA TABLE!-->
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
         <script src="javascript/purchaseHistory.js" defer></script>
-</body>
+    </body>
 </html>
