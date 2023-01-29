@@ -16,7 +16,6 @@ import java.util.List;
 import javax.sql.DataSource;
 import models.LoginHistory;
 import models.PaymentHistory;
-import models.UserAccount;
 import repo.IHistoryRepository;
 
 /**

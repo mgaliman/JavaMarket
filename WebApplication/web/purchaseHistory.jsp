@@ -10,29 +10,29 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Purchase history</title>
+        <title>Purchase History</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
         <link rel="stylesheet" href="css/main.css">   
         <!--DATA TABLE!-->
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
-
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
     </head>
     <body class="m-5">
+        <h2>Purchase History</h2>
         <c:if test="${purchaseHistory.isEmpty()}">
             <h1>You haven't purchased anything yet!</h>
             </c:if>
-        <table class="table table-striped table-hover table-bordered" id='purchaseHistoryTable'>
-            <thead>
+        <table class="table" id='purchaseHistoryTable'>
+            <thead class="table-dark">
                 <tr>
-                    <th>Payment type</th>
-                    <th>Payer</th>
-                    <th>Items</th>
-                    <th>Date</th>
+                    <th scope="col">Payment type</th>
+                    <th scope="col">Payer</th>
+                    <th scope="col">Items</th>
+                    <th scope="col">Date</th>
                 </tr>
             </thead>
-            <tbody>
-                <c:forEach var="purchase" items="${purchaseHistory}">
+            <tbody class="table-light">
+                <c:forEach var="purchase" items="${purchaseHistory}">   
                     <tr>
                         <td>${purchase.paymentType}</td>
                         <td>${purchase.payer}</td>
@@ -47,7 +47,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
         <!--DATA TABLE!-->
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
         <script src="javascript/purchaseHistory.js" defer></script>
 </body>
 </html>
