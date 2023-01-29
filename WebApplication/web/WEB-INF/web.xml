@@ -35,10 +35,6 @@
         <servlet-class>controllers.LogoutServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>MyProfileServlet</servlet-name>
-        <servlet-class>controllers.MyProfileServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ProductServlet</servlet-name>
         <servlet-class>controllers.ProductServlet</servlet-class>
     </servlet>
@@ -89,10 +85,6 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>MyProfileServlet</servlet-name>
-        <url-pattern>/myProfile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProductServlet</servlet-name>
