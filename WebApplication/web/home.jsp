@@ -28,7 +28,7 @@
                     <h1 class="display-4">Welcome ${sessionScope.userAccount.get().firstName}</h1>
                 </c:if>
             </div>
-        </div>ž
+        </div>
         
         <div class="d-flex justify-content-center mt-3"> 
             <h5 class="text text-center">

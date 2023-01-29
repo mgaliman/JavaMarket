@@ -18,59 +18,70 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Bellota:wght@300;400&display=swap" rel="stylesheet">
-
         <link rel="stylesheet" href="css/categoryEditor.css">
     </head>
     <body>
+        <!-- Navigation bar -->
+        <%@include file='navbar.jsp'%>
+
         <form  onsubmit="addorEditProduct(event)" >
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <image src="./assets/imgPlaceholder.jpg" alt="userImage" class="imgPlaceholder" id="imgPlaceholder"/>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="input-group">
-                            <p>Image: </p>
-                            <input type="file" id="imgPicker" accept="image/*" onchange="loadFile(event)"></input>
+            <div class="mx-auto py-5" style="width: 70%;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <image src="./assets/imgPlaceholder.jpg" alt="userImage" id="imgPlaceholder" style="width: 100%;"/>
                         </div>
-                        <div class="input-group mt-3">
-                            <p>Title: </p>
-                            <input type="text" id="inTitle" required maxLength="50" pattern="[^()/><\][\\\x22,;|]+"/>
+                        <div class="col-sm-6">
+                            <div class="card shadow-2-strong" style="background-color: #f5f7fa;">
+                                <div class="card-body mx-auto mt-3" style="width: 90%;">
+                                    <div>
+                                        <p>Image:</p>
+                                        <input type="file" id="imgPicker" accept="image/*" onchange="loadFile(event)"></input>
+                                    </div>
+                                    <div class="mt-3">
+                                        <input type="text" id="inTitle" required maxLength="50" pattern="[^()/><\][\\\x22,;|]+" 
+                                               placeholder="Title" class="form-control form-control-lg"/>
+                                    </div>
+                                    <div class="mt-3">
+                                        <input type="text" id="inDescription" required maxLength="500" pattern="[^()/><\][\\\x22,;|]+" 
+                                               placeholder="Description" class="form-control form-control-lg"/>
+                                    </div>
+                                    <div class="mt-3">
+                                        <input type="number" id="inPrice" required min="0" inputmode="numeric" pattern="[^()/><\][\\\x22,;|]+" 
+                                               placeholder="Price" class="form-control form-control-lg"/>
+                                    </div>
+                                    <div class="mt-3">
+                                        <p>Category: </p>
+                                        <select name="categories" id="categories">
+                                            <c:forEach var="category" items="${categories}">
+                                                <option value=${category.id}>${category.title}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+
+                                    <button type="submit" class="mx-auto mt-3 mb-3 btn btn-primary" style="width: 90%">Submit</button>
+                                </div>           
+                            </div>                        
                         </div>
-                        <div class="input-group mt-3">
-                            <p>Description: </p>
-                            <input type="text" id="inDescription" required maxLength="500" pattern="[^()/><\][\\\x22,;|]+"/>
-                        </div>
-                        <div class="input-group mt-3">
-                            <p>Price: </p>
-                            <input type="number" id="inPrice" required min="0" inputmode="numeric" pattern="/^\d*\.?\d*$/"/>
-                        </div>
-                        <div class="input-group mt-3">
-                            <p>Category: </p>
-                            <select name="categories" id="categories">
-                                <c:forEach var="category" items="${categories}">
-                                    <option value=${category.id}>${category.title}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                        <button type="submit" class="btnSubmit mt-3">Submit</button>
-                    </div>
+                    </div>           
                 </div>
             </div>
         </form>
-        <div class="container-xl">
-            <h1 class="lblMessage"></h1>
-            <div class="table-responsive">
-                <div class="table-wrapper">
+
+        <div class="mx-auto py-5" style="width: 70%;">
+            <div class="card shadow-2-strong" style="background-color: #f5f7fa;">
+                <div class="card-body">
                     <div class="table-title">
                         <div class="row">
                             <div class="col-sm-8"><h2>Product <b>Manager</b></h2></div>
                             <div class="col-sm-4">
-                                <i onClick="openModal()" class="material-icons-outlined">add_circle</i>
+                                <i onClick="openModal()" class="material-icons-outlined">
+                                    add_circle_outline
+                                </i>
                             </div>
                         </div>
                     </div>
-                    <table class="table table-striped table-hover table-bordered">
+                    <table class="table table-borderless mb-0">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -92,15 +103,12 @@
                                         <a href="#" class="delete" onClick="deleteProduct(${product.id}, this)"><i class="material-icons">&#xE872;</i></a>
                                     </td>
                                 </tr>    
-                            </c:forEach>  
+                            </c:forEach>   
                         </tbody>
                     </table>
-                    <div class="clearfix">
-                        <div class="hint-text">Back to <b><a href="home">Home</a></b></div>
-                    </div>
                 </div>
-            </div>  
-        </div>   
+            </div>
+        </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
