@@ -12,7 +12,6 @@ const toBase64 = file => new Promise((resolve, reject) => {
     });
 
 let CONFIRMATION = "Are you sure you want to delete this!";
-
 function deleteCategory(id, element) {
     if (confirm(CONFIRMATION) === true) {
         $.ajax({
@@ -110,7 +109,7 @@ async function updateCategory(id) {
 }
 
 var ok = true;
-function addorEditCategory(event) {
+function addOrEditCategory(event) {
     event.preventDefault();
     if (ok) {
         if (idCategory === null) {

@@ -28,6 +28,14 @@
                     <h1 class="display-4">Welcome ${sessionScope.userAccount.get().firstName}</h1>
                 </c:if>
             </div>
+        </div>ž
+        
+        <div class="d-flex justify-content-center mt-3"> 
+            <h5 class="text text-center">
+                Experience the ultimate in quality, performance,
+                <br>and satisfaction with our truly awesome products!
+                <br>Designed to exceed your expectations and elevate your lifestyle.
+            </h5>
         </div>
 
         <!-- Manage categories button -->
@@ -36,16 +44,7 @@
                 <a type="button" class="btn btn-dark" href="category">MANAGE CATEGORIES</a>
             </div>
         </c:if>
-
-        <div class="d-flex justify-content-center align-items-center mt-5"> 
-            <button class="btn btn-dark">OUR CATEGORIES</button>
-        </div>
-        <div class="d-flex justify-content-center mt-3"> 
-            <span class="text text-center">
-                Finding Best Products Now
-                <br> in Your Fingertips
-            </span>
-        </div>
+        
         <div class="row m-2 g-4 justify-content-center">
             <c:forEach var="category" items="${categories}">
                 <div class="col-md-3"  onclick="filterProducts(${category.id})">

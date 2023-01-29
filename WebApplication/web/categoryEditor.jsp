@@ -17,39 +17,50 @@
         <link rel="stylesheet" href="css/categoryEditor.css">
     </head>
     <body>
+        <!-- Navigation bar -->
+        <%@include file='navbar.jsp'%>
+
         <form  onsubmit="addorEditCategory(event)" >
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <image src="./assets/imgPlaceholder.jpg" alt="userImage" class="imgPlaceholder" id="imgPlaceholder"/>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="input-group">
-                            <p>Image:</p>
-                            <input type="file" id="imgPicker" accept="image/*" onchange="loadFile(event)"></input>
+            <div class="mx-auto py-5" style="width: 70%;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <image src="./assets/imgPlaceholder.jpg" alt="userImage" id="imgPlaceholder" style="width: 100%;"/>
                         </div>
-                        <div class="input-group mt-3">
-                            <p>Title</p>
-                            <input type="text" id="inTitle" required maxLength="50" pattern="[^()/><\][\\\x22,;|]+"/>
+                        <div class="col-sm-6">
+                            <div class="card shadow-2-strong" style="background-color: #f5f7fa;">
+                                <div class="card-body mx-auto mt-3" style="width: 90%;">
+                                    <div>
+                                        <p>Image:</p>
+                                        <input type="file" id="imgPicker" accept="image/*" onchange="loadFile(event)"></input>
+                                    </div>
+                                    <div class="mt-3">
+                                        <input type="text" id="inTitle" required maxLength="50" pattern="[^()/><\][\\\x22,;|]+" 
+                                               placeholder="Title" class="form-control form-control-lg"/>
+                                    </div>
+                                    <button type="submit" class="mx-auto mt-3 mb-3 btn btn-primary" style="width: 90%">Submit</button>
+                                </div>           
+                            </div>                        
                         </div>
-                        <button type="submit" class="btnSubmit mt-3">Submit</button>
-                    </div>
+                    </div>           
                 </div>
             </div>
         </form>
-        <div class="container-xl">
-            <h1 class="lblMessage"></h1>
-            <div class="table-responsive">
-                <div class="table-wrapper">
+
+        <div class="mx-auto py-5" style="width: 70%;">
+            <div class="card shadow-2-strong" style="background-color: #f5f7fa;">
+                <div class="card-body">
                     <div class="table-title">
                         <div class="row">
                             <div class="col-sm-8"><h2>Category <b>Manager</b></h2></div>
                             <div class="col-sm-4">
-                                <i onClick="openModal()" class="material-icons-outlined">add_circle</i>
+                                <i onClick="openModal()" class="material-icons-outlined">
+                                    add_circle_outline
+                                </i>
                             </div>
                         </div>
                     </div>
-                    <table class="table table-striped table-hover table-bordered">
+                    <table class="table table-borderless mb-0">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -63,7 +74,7 @@
                                 <tr>
                                     <td>${category.id}</td>
                                     <td>${category.title}</td>
-                                    <td>slika</td>
+                                    <td>.png</td>
                                     <td>
                                         <a href="#" class="edit" onclick="getCategory(${category.id})"><i class="material-icons">&#xE254;</i></a>
                                         <a href="#" class="delete" onClick="deleteCategory(${category.id}, this)"><i class="material-icons">&#xE872;</i></a>
@@ -72,13 +83,9 @@
                             </c:forEach>  
                         </tbody>
                     </table>
-                    <div class="clearfix">
-                        <div class="hint-text">Back to <b><a href="home">Home</a></b></div>
-                    </div>
                 </div>
-            </div>  
-        </div>   
-
+            </div>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
