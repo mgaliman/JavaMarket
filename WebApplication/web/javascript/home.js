@@ -31,7 +31,7 @@ function renderResults(data) {
         $(".productscontainer").empty();
         for (var i = 0; i < data.length; i++) {
             $(".productscontainer").append(
-                    "<div class='productCard m-2'>"
+                    "<div class='m-2'>"
                     + "<img class='card-img-top' width='200px' height='200px' src='" + data[i].picturePath + "' alt='Card image cap'>"
                     + "<div class='card-body'>"
                     + "<h5 class='card-title'>" + data[i].title + "</h5>"
@@ -52,15 +52,7 @@ function renderResults(data) {
 }
 
 function addToCart(id) {
-    changeCartStyle();
     callAjax(id);
-}
-
-function changeCartStyle() {
-    $(".iCart").attr('class', "material-icons-outlined text-warning iCart");
-    setTimeout(function () {
-        $(".iCart").attr("class", " material-icons-outlined text-secondary iCart");
-    }, 400);
 }
 
 function callAjax(id) {

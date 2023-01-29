@@ -48,7 +48,7 @@
         <div class="row m-2 g-4 justify-content-center">
             <c:forEach var="category" items="${categories}">
                 <div class="col-md-3"  onclick="filterProducts(${category.id})">
-                    <div class="card p-1 btn btn-dark">
+                    <div class="card p-1 btn bg-dark text-white">
                         <div class="d-flex justify-content-between align-items-center p-2">
                             <div class="flex-column lh-1 imagename"> <span>${category.title}</span></div>
                             <div> <img src="${category.picturePath}" height="100" width="100" /> </div>
@@ -68,7 +68,7 @@
         <!-- Items -->
         <div class="d-flex productscontainer justify-content-center m-5">
             <c:forEach var="product" items="${products}">
-                <div class="productCard m-2">
+                <div class="m-2">
                     <c:if test="${product.picturePath == null}">
                         <img class="card-img-top" width="200px" height="200px" src="assets/imgPlaceholder.jpg" alt="Card image cap">
                     </c:if>
