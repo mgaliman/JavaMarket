@@ -111,7 +111,7 @@ GO
 create proc deleteCategory
 	@IDCategory int
 as
-delete from CategoryProduct
+delete from Product
 where categoryID=@IDCategory
 delete from Category
 where IDCategory = @IDCategory
