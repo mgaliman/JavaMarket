@@ -122,7 +122,7 @@ async function updateProduct(id) {
 }
 
 var ok = true;
-function addorEditProduct(event) {
+function addOrEditProduct(event) {
     event.preventDefault();
     if (ok) {
         if (idProduct === null) {

@@ -16,7 +16,7 @@ public class DataSourceSingleton {
 
     private static DataSource instance;
 
-    private static final String DB = "WebShop";
+    private static final String DB = "JavaMarketDb";
     private static final String USER = "sa";
     private static final String PWD = "MarkoG123!!!";
     private static final String SERVER = "NB-MGALIMAN\\JAVASERVER";

@@ -23,7 +23,7 @@
 
         <div class="m-5">
             <c:if test="${purchaseHistory.isEmpty()}">
-                <h1>You haven't purchased anything yet!</h>
+                <h1>You haven't purchased anything yet!</h1>
                 </c:if>
                 <table class="table" id='purchaseHistoryTable'>
                     <thead class="table-dark">

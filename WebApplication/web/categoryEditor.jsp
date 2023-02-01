@@ -19,8 +19,7 @@
     <body>
         <!-- Navigation bar -->
         <%@include file='navbar.jsp'%>
-
-        <form  onsubmit="addorEditCategory(event)" >
+        <form onsubmit="addOrEditCategory(event)" >
             <div class="mx-auto py-5" style="width: 70%;">
                 <div class="container">
                     <div class="row">

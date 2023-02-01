@@ -1,240 +1,244 @@
-create database WebShop
+CREATE DATABASE JavaMarketDb
 GO
 
-use WebShop
+USE JavaMarketDb
 GO
 
-create table UserAccount
+CREATE TABLE UserAccount
 (
-	IDUserAccount int constraint PK_UserAccount primary key identity,
-	FirstName nvarchar(50) not null,
-	LastName nvarchar(50) not null,
-	Email nvarchar(50) not null,
-	Pswd nvarchar(50) not null,
-	IsAdmin bit not null
+	IDUserAccount INT CONSTRAINT PK_UserAccount PRIMARY KEY IDENTITY,
+	FirstName NVARCHAR(50) NOT NULL,
+	LastName NVARCHAR(50) NOT NULL,
+	Email NVARCHAR(50) NOT NULL,
+	Pswd NVARCHAR(50) NOT NULL,
+	IsAdmin BIT NOT NULL
 )
 GO
 
-create table Category
+------------ADMIN-----------
+INSERT INTO UserAccount (FirstName, LastName, Email, Pswd, IsAdmin)
+VALUES ('AdminFirstName', 'AdminLastName', 'admin@admin.com', 'admin', 1);
+
+CREATE TABLE Category
 (
-	IDCategory int constraint PK_Category primary key identity,
-	Title nvarchar(50),
-	PicturePath nvarchar(max)
+	IDCategory INT CONSTRAINT PK_Category PRIMARY KEY IDENTITY,
+	Title NVARCHAR(50),
+	PicturePath NVARCHAR(MAX)
 )
 GO
 
-create table Product
+CREATE TABLE Product
 (
-	IDProduct int constraint PK_Product primary key identity,
-	Title nvarchar(50),
-	Descr nvarchar(250),
-	Price float,
-	PicturePath nvarchar(max),
-	CategoryID int constraint FK_CategoryID foreign key references Category(IDCategory)
+	IDProduct INT CONSTRAINT PK_Product PRIMARY KEY IDENTITY,
+	Title NVARCHAR(50),
+	Descr NVARCHAR(250),
+	Price FLOAT,
+	PicturePath NVARCHAR(MAX),
+	CategoryID INT CONSTRAINT FK_CategoryID FOREIGN KEY REFERENCES Category(IDCategory)
 )
 GO
 
-create table LoginHistory
+CREATE TABLE LoginHistory
 (
-	IDLoginHistory int constraint PK_LoginHistory primary key identity,
-	LoginDate datetime not null,
-	IPAddress nvarchar(50) not null,
-	FirstName nvarchar(50) not null,
-	LastName nvarchar(50) not null,
-	Email nvarchar(50) not null,
+	IDLoginHistory INT CONSTRAINT PK_LoginHistory PRIMARY KEY IDENTITY,
+	LoginDate DATETIME NOT NULL,
+	IPAddress NVARCHAR(50) NOT NULL,
+	FirstName NVARCHAR(50) NOT NULL,
+	LastName NVARCHAR(50) NOT NULL,
+	Email NVARCHAR(50) NOT NULL,
 )
 GO
 
-create table PaymentHistory
+CREATE TABLE PaymentHistory
 (
-	IDPaymentHistory int constraint PK_PaymentHistory primary key identity,
-	PaymentType nvarchar(50) not null,
-	UserAccountID int constraint FK_UserAccountID foreign key references UserAccount(IDUserAccount),
-	Items nvarchar(max) not null,
-	PaymentDate datetime not null
+	IDPaymentHistory INT CONSTRAINT PK_PaymentHistory PRIMARY KEY IDENTITY,
+	PaymentType NVARCHAR(50) NOT NULL,
+	UserAccountID INT CONSTRAINT FK_UserAccountID FOREIGN KEY REFERENCES UserAccount(IDUserAccount),
+	Items NVARCHAR(MAX) NOT NULL,
+	PaymentDate DATETIME NOT NULL
 )
 GO
 
 ------------PROCEDURES-----------
 ------------ACCOUNT-----------
-create proc creatAccount
-	@Email nvarchar(50),
-	@FirstName nvarchar(50),
-	@LastName nvarchar(50),
-	@Pswd nvarchar(50),
-	@IsAdmin bit,
-	@IDUser int out
-as
-insert into UserAccount(FirstName, LastName, Email, Pswd, IsAdmin)
-values (@FirstName, @LastName, @Email, @Pswd, @IsAdmin)
-set @IDUser = SCOPE_IDENTITY()
+CREATE PROCEDURE creatAccount
+	@Email NVARCHAR(50),
+	@FirstName NVARCHAR(50),
+	@LastName NVARCHAR(50),
+	@Pswd NVARCHAR(50),
+	@IsAdmin BIT,
+	@IDUser INT OUT
+AS
+INSERT INTO UserAccount(FirstName, LastName, Email, Pswd, IsAdmin)
+VALUES (@FirstName, @LastName, @Email, @Pswd, @IsAdmin)
+SET @IDUser = SCOPE_IDENTITY()
 GO
 
-create proc doesAccountExist
-	@Email nvarchar(50)
-as
-select * from UserAccount
-where Email = @Email
+CREATE PROCEDURE doesAccountExist
+	@Email NVARCHAR(50)
+AS
+SELECT * FROM UserAccount
+WHERE Email = @Email
 GO
 
-create proc getAccount
-	@Email nvarchar(50),
-	@Pswd nvarchar(50)
-as
-select * from UserAccount
-where Email = @Email and Pswd = @Pswd
+CREATE PROCEDURE getAccount
+	@Email NVARCHAR(50),
+	@Pswd NVARCHAR(50)
+AS
+SELECT * FROM UserAccount
+WHERE Email = @Email and Pswd = @Pswd
 GO
 
 ------------CATEGORY-----------
-create procedure createCategory
-	@Title nvarchar(50),
-	@PicturePath nvarchar(max),
-	@IDCategory int out
-as
-insert into Category(Title, PicturePath)
-values(@Title, @PicturePath)
-set @IDCategory = SCOPE_IDENTITY()
+CREATE PROCEDURE createCategory
+	@Title NVARCHAR(50),
+	@PicturePath NVARCHAR(MAX),
+	@IDCategory INT OUT
+AS
+INSERT INTO Category(Title, PicturePath)
+VALUES(@Title, @PicturePath)
+SET @IDCategory = SCOPE_IDENTITY()
 GO
 
-create procedure doesCategoryExist
-	@Title nvarchar(50)
-as
-select*from Category
-where Title = @Title
+CREATE PROCEDURE doesCategoryExist
+	@Title NVARCHAR(50)
+AS
+SELECT * FROM Category
+WHERE Title = @Title
 GO
 
-create procedure getCategories
-as
-select*from Category
+CREATE PROCEDURE getCategories
+AS
+SELECT * FROM Category
 GO
 
-create proc deleteCategory
-	@IDCategory int
-as
-delete from Product
-where categoryID=@IDCategory
-delete from Category
-where IDCategory = @IDCategory
+CREATE PROCEDURE deleteCategory
+	@IDCategory INT
+AS
+DELETE FROM Product
+WHERE categoryID=@IDCategory
+DELETE FROM Category
+WHERE IDCategory = @IDCategory
 GO
 
-create proc getCategory
-	@IDCategory int
-as
-select*from Category
-where IDCategory = @IDCategory
+CREATE PROCEDURE getCategory
+	@IDCategory INT
+AS
+SELECT * FROM Category
+WHERE IDCategory = @IDCategory
 GO
 
-create proc updateCategory
-	@IDCategory int,
-	@Title nvarchar(50),
-	@PicturePath nvarchar(max)
-as
-update Category
-set Title = @Title, PicturePath = @PicturePath
-where IDCategory = @IDCategory
+CREATE PROCEDURE updateCategory
+	@IDCategory INT,
+	@Title NVARCHAR(50),
+	@PicturePath NVARCHAR(MAX)
+AS
+UPDATE Category
+SET Title = @Title, PicturePath = @PicturePath
+WHERE IDCategory = @IDCategory
 GO
 
 ------------PRODUCT-----------
-create procedure createProduct
-	@Title nvarchar(50),
-	@Descr nvarchar(250),
-	@Price float,
-	@PicturePath nvarchar(max),
-	@CategoryID int,
-	@IDProduct int out
-as 
-insert into Product(Title, Descr, Price, PicturePath, CategoryID)
-values (@Title, @Descr, @Price, @PicturePath, @CategoryID)
-set @IDProduct = SCOPE_IDENTITY()
+CREATE PROCEDURE createProduct
+	@Title NVARCHAR(50),
+	@Descr NVARCHAR(250),
+	@Price FLOAT,
+	@PicturePath NVARCHAR(MAX),
+	@CategoryID INT,
+	@IDProduct INT OUT
+AS 
+INSERT INTO Product(Title, Descr, Price, PicturePath, CategoryID)
+VALUES (@Title, @Descr, @Price, @PicturePath, @CategoryID)
+SET @IDProduct = SCOPE_IDENTITY()
 GO
 
-create procedure getProducts
-as
-select*from Product
+CREATE PROCEDURE getProducts
+AS
+SELECT * FROM Product
 GO
 
-create procedure doesProductExist
-	@Title nvarchar(50)
-as
-select*from Product
-where Title = @Title
+CREATE PROCEDURE doesProductExist
+	@Title NVARCHAR(50)
+AS
+SELECT * FROM Product
+WHERE Title = @Title
 GO
 
-create proc deleteProduct
-	@IDProduct int
-as
-delete from Product
-where IDProduct = @IDProduct
+CREATE PROCEDURE deleteProduct
+	@IDProduct INT
+AS
+DELETE FROM Product
+WHERE IDProduct = @IDProduct
 GO
 
-create proc getProduct
-	@IDProduct int
-as
-select * from Product
-where IDProduct = @IDProduct
+CREATE PROCEDURE getProduct
+	@IDProduct INT
+AS
+SELECT * FROM Product
+WHERE IDProduct = @IDProduct
 GO
 
-create proc updateProduct
-	@IDProduct int,
-	@Title nvarchar(50),
-	@Descr nvarchar(250),
-	@Price float,
-	@PicturePath nvarchar(max),
-	@CategoryID int
-as
-update Product
-set Title = @Title, Descr = @Descr, PicturePath = @PicturePath, Price = @Price , CategoryID = @CategoryID
-where IDProduct = @IDProduct
+CREATE PROCEDURE updateProduct
+	@IDProduct INT,
+	@Title NVARCHAR(50),
+	@Descr NVARCHAR(250),
+	@Price FLOAT,
+	@PicturePath NVARCHAR(MAX),
+	@CategoryID INT
+AS
+UPDATE Product
+SET Title = @Title, Descr = @Descr, PicturePath = @PicturePath, Price = @Price , CategoryID = @CategoryID
+WHERE IDProduct = @IDProduct
 GO
 
-create proc getProductsByCategory
-	@IDCategory int
-as
-select * from Product
-where categoryID = @IDCategory
+CREATE PROCEDURE getProductsByCategory
+	@IDCategory INT
+AS
+SELECT * FROM Product
+WHERE categoryID = @IDCategory
 GO
 
 ------------LOGIN HISTORY-----------
-create proc getLoginHistory
-as
-select*from LoginHistory
-go
+CREATE PROCEDURE getLoginHistory
+AS
+SELECT * FROM LoginHistory
+GO
 
-create proc createLoginHistory
-	@LoginDate datetime,
-	@IPAddress nvarchar(50),
-	@FirstName nvarchar(50),
-	@LastName nvarchar(50),
-	@Email nvarchar(50),
-	@IDLoginHistory int out
-as
-insert into LoginHistory(LoginDate, IPAddress, FirstName, LastName, Email)
-values(@LoginDate, @IPAddress, @FirstName, @LastName, @Email)
-set @IDLoginHistory = SCOPE_IDENTITY()
-go
+CREATE PROCEDURE createLoginHistory
+	@LoginDate DATETIME,
+	@IPAddress NVARCHAR(50),
+	@FirstName NVARCHAR(50),
+	@LastName NVARCHAR(50),
+	@Email NVARCHAR(50),
+	@IDLoginHistory INT OUT
+AS
+INSERT INTO LoginHistory(LoginDate, IPAddress, FirstName, LastName, Email)
+VALUES(@LoginDate, @IPAddress, @FirstName, @LastName, @Email)
+SET @IDLoginHistory = SCOPE_IDENTITY()
+GO
 
 ------------PAYMENT HISTORY-----------
-create proc getPaymentHistoryADMIN
-as
-select*from PaymentHistory
-go
+CREATE PROCEDURE getPaymentHistoryADMIN
+AS
+SELECT * FROM PaymentHistory
+GO
 
-create proc getPaymentHistoryUSER
-	@IDUserAccount int
-as
-select*from PaymentHistory
+CREATE PROCEDURE getPaymentHistoryUSER
+	@IDUserAccount INT
+AS
+SELECT * FROM PaymentHistory
 inner join UserAccount on PaymentHistory.UserAccountID = UserAccount.IDUserAccount
-where IDUserAccount = @IDUserAccount
-go
+WHERE IDUserAccount = @IDUserAccount
+GO
 
-create proc createPaymentHistory
-	@PaymentType nvarchar(50),
-	@UserAccountID int,
-	@Items nvarchar(max),
-	@PaymentDate datetime ,
-	@IDPaymentHistory int out
-as
-insert into PaymentHistory(PaymentType, UserAccountID, Items, PaymentDate)
-values(@PaymentType, @UserAccountID, @Items, @PaymentDate)
-set @IDPaymentHistory = SCOPE_IDENTITY()
-go
+CREATE PROCEDURE createPaymentHistory
+	@PaymentType NVARCHAR(50),
+	@UserAccountID INT,
+	@Items NVARCHAR(MAX),
+	@PaymentDate DATETIME ,
+	@IDPaymentHistory INT OUT
+AS
+INSERT INTO PaymentHistory(PaymentType, UserAccountID, Items, PaymentDate)
+VALUES(@PaymentType, @UserAccountID, @Items, @PaymentDate)
+SET @IDPaymentHistory = SCOPE_IDENTITY()
+GO

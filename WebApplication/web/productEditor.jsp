@@ -24,7 +24,7 @@
         <!-- Navigation bar -->
         <%@include file='navbar.jsp'%>
 
-        <form onsubmit="addorEditProduct(event)" >
+        <form onsubmit="addOrEditProduct(event)" >
             <div class="mx-auto py-5" style="width: 70%;">
                 <div class="container">
                     <div class="row">
