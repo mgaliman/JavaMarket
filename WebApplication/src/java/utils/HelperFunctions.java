@@ -38,7 +38,7 @@ public class HelperFunctions {
 
             StringBuilder sb = new StringBuilder();
             for (Map.Entry<Product, Integer> product : cartProducts.entrySet()) {
-                sb.append(product.getKey().getTitle() + "(" + product.getValue() + ")");
+                sb.append(product.getKey().getTitle()).append("(").append(product.getValue()).append(")");
             }
 
             Optional<UserAccount> userAccount = (Optional<UserAccount>) session.getAttribute("userAccount");
@@ -53,5 +53,4 @@ public class HelperFunctions {
     private static void initRepo() {
         historyRepo = RepositoryFactory.getLoginHistoryRepository();
     }
-
 }

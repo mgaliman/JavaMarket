@@ -1,6 +1,5 @@
 //CARDS
 $('.buy').on('click', () => {
-
     $('.bottom').addClass("clicked");
 });
 
@@ -46,7 +45,6 @@ function renderResults(data) {
                     + "</div>"
                     + "</div>"
                     ).fadeIn().delay(2000);
-
         }
     });
 }
